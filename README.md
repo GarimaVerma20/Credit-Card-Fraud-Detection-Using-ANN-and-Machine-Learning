@@ -22,7 +22,7 @@ Our objective is to create the classifier for credit card fraud detection. To do
 ## Dataset:
 [Credit Card Fraud Detection](https://www.kaggle.com/mlg-ulb/creditcardfraud)
 
-The datasets contains transactions made by credit cards in September 2013 by european cardholders. This dataset presents transactions that occurred in two days, where we have 492 frauds out of 284,807 transactions. The dataset is highly unbalanced, the positive class (frauds) account for 0.172% of all transactions. I decided to proceed to an undersampling strategy to re-balance the class.
+The datasets contains transactions made by credit cards in September 2013 by european cardholders. This dataset presents transactions that occurred in two days, where we have 492 frauds out of 284,807 transactions. The dataset is highly unbalanced, the positive class (frauds) account for 0.172% of all transactions. I decided to proceed to an SMOTE strategy to re-balance the class.
 
 It contains only numerical input variables which are the result of a PCA transformation. Unfortunately, due to confidentiality issues, we cannot provide the original features and more background information about the data.<br>
 ## Implementation:
@@ -30,22 +30,20 @@ It contains only numerical input variables which are the result of a PCA transfo
 **Libraries:**  `NumPy` `pandas` `pylab` `matplotlib` `sklearn` `seaborn` `plotly` `tensorflow` `keras` `imblearn`
 ## Data Exploration:
 Only 492 (or 0.172%) of transaction are fraudulent. That means the data is highly unbalanced with respect with target variable Class.<br>
-<img src ="https://github.com/Pradnya1208/Credit-Card-Fraud-Detection-Using-Neural-Networks/blob/main/output/eda1.PNG?raw=true">
-<br>
-The dataset is highly imbalanced ! It's a big problem because classifiers will always predict the most common class without performing any analysis of the features and it will have a high accuracy rate, obviously not the correct one. To change that, I will proceed to random undersampling.
 
-The simplest undersampling technique involves randomly selecting examples from the majority class and deleting them from the training dataset. This is referred to as random undersampling.
+The dataset is highly imbalanced ! It's a big problem because classifiers will always predict the most common class without performing any analysis of the features and it will have a high accuracy rate, obviously not the correct one. To change that, I will proceed to SMOTE.
 
-Although simple and effective, a limitation of this technique is that examples are removed without any concern for how useful or important they might be in determining the decision boundary between the classes. This means it is possible, or even likely, that useful information will be deleted.<br>
+It is a data preprocessing technique used to handle imbalanced classification problems, where one class (minority class) has significantly fewer samples than the other (majority class).
 
-<img src="https://github.com/Pradnya1208/Credit-Card-Fraud-Detection-Using-Neural-Networks/blob/main/output/undersampling.PNG?raw=true">
-<br>
-For undersampling, we can use the package imblearn with RandomUnderSampler function. <br>
+Instead of just duplicating existing minority class samples (which can cause overfitting), SMOTE generates new synthetic samples of the minority class to balance the dataset.
+
+For SMOTE, we can use the package imblearn with SMOTE function. <br>
 
 ```
-import imblearn
-from imblearn.under_sampling import RandomUnderSampler 
-undersample = RandomUnderSampler(sampling_strategy=0.5)
+from imblearn.over_sampling import SMOTE
+
+# Define SMOTE with a desired sampling strategy
+smote = SMOTE(sampling_strategy=0.5)  # Generates synthetic samples until the minority class is 50% of the majority
 ```
 
 <img src= "https://github.com/Pradnya1208/Credit-Card-Fraud-Detection-Using-Neural-Networks/blob/main/output/eda2.PNG?raw=true">
