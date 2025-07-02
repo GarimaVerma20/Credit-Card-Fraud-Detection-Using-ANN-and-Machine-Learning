@@ -46,7 +46,6 @@ from imblearn.over_sampling import SMOTE
 smote = SMOTE(sampling_strategy=0.5)  # Generates synthetic samples until the minority class is 50% of the majority
 ```
 
-<img src= "https://github.com/Pradnya1208/Credit-Card-Fraud-Detection-Using-Neural-Networks/blob/main/output/eda2.PNG?raw=true">
 
 ## Machine Learning Model Evaluation and Prediction:
 ### Logistic Regression:
